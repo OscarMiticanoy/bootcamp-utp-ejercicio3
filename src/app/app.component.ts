@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  url: string = 'https://yesno.wtf/api';
+	data;
+
+	constructor(private http: HttpClient) {
+		let channel = this.http.get(this.url);
+		channel.subscribe((data) => (this.data = data));
+	}
 }
